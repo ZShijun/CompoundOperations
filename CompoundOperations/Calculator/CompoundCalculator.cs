@@ -1,13 +1,12 @@
 using System;
 using System.Collections;
 using System.IO;
-using CompoundOperations.Elements.Mathematics;
 using CompoundOperations.Expressions;
 using CompoundOperations.Extensions;
 using CompoundOperations.Grammar;
 using PerCederberg.Grammatica.Runtime;
 
-namespace CompoundOperations.Operator
+namespace CompoundOperations.Calculator
 {
     internal class CompoundCalculator : CompoundAnalyzer
     {
@@ -21,15 +20,14 @@ namespace CompoundOperations.Operator
             this._variables = variables;
         }
 
-        public int Operate(string expression) {
-            CompoundParser parser;
-            Node              node;
-
-            parser = new CompoundParser(new StringReader(expression), this);
+        public object Calculate(string expression)
+        {
+            CompoundParser parser = new CompoundParser(new StringReader(expression), this);
             parser.Prepare();
-            node = parser.Parse();
-            return (int) node.Values[0];
+            Node node = parser.Parse();
+            return node.Values[0];
         }
+
         #region Token
         public override Node ExitAdd(Token node)
         {

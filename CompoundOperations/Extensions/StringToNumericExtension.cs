@@ -9,28 +9,46 @@ namespace CompoundOperations.Extensions
     public static class StringToNumericExtension
     {
         /// <summary>
-        /// 将十进制整数字字符串(包括有符号整型，无符号整型，有符号长整型和无符号长整型)转成decimal
+        /// 将数字字符串转成decimal
         /// </summary>
-        /// <param name="input">整数字符串(格式：\d+(u|l|ul|lu)?)</param>
+        /// <param name="input">数字字符串</param>
         /// <returns></returns>
-        public static decimal ParseDecIntToDecimal(this string input)
+        public static decimal ParseToDecimal(this string input)
         {
             if (string.IsNullOrWhiteSpace(input))
             {
                 return default;
             }
-
-            if (!input.IsNegativeInteger()
-               && !input.IsNonnegativeInteger())
+            decimal result = 0M;
+            input = input.Trim();
+            if (input.IsNumber())
             {
-                throw new FormatException($"{input} is not a correct integer format");
+                result = decimal.Parse(input);
+            }
+            else if (input.IsHexNumber())
+            {
+                input = input[2..];
+                long num = long.Parse(input, NumberStyles.HexNumber);
+                result = Convert.ToDecimal(num);
+            }
+            else if (input.IsRealNumber())
+            {
+                result = decimal.Parse(input, NumberStyles.Float);
+            }
+            else
+            {
+                throw new FormatException($"{input} is not a correct number");
             }
 
-            string number = input.Trim(' ', 'u', 'l', 'U', 'L');
-            return decimal.Parse(number);
+            return result;
         }
 
-        public static bool IsNegativeInteger(this string input)
+        /// <summary>
+        /// 是否为十六进制数字字符串
+        /// </summary>
+        /// <param name="input">数字字符串</param>
+        /// <returns></returns>
+        public static bool IsHexNumber(this string input)
         {
             if (string.IsNullOrWhiteSpace(input))
             {
@@ -38,11 +56,16 @@ namespace CompoundOperations.Extensions
             }
 
             input = input.Trim();
-            Regex regex = new Regex("^(-\\d+)[lL]?$");
+            Regex regex = new Regex("^0[Xx][0-9a-fA-F]+$");
             return regex.IsMatch(input);
         }
 
-        public static bool IsNonnegativeInteger(this string input)
+        /// <summary>
+        /// 是否为十进制数字字符串
+        /// </summary>
+        /// <param name="input">数字字符串</param>
+        /// <returns></returns>
+        public static bool IsNumber(this string input)
         {
             if (string.IsNullOrWhiteSpace(input))
             {
@@ -50,8 +73,24 @@ namespace CompoundOperations.Extensions
             }
 
             input = input.Trim();
-            Regex regex = new Regex("^(\\d+)([lL]|[uU]|[uU][lL]|[lL][uU])?$");
-            Match match = regex.Match(input);
+            Regex regex = new Regex("^\\d+$");
+            return regex.IsMatch(input);
+        }
+
+        /// <summary>
+        /// 是否为浮点数
+        /// </summary>
+        /// <param name="input">数字字符串</param>
+        /// <returns></returns>
+        public static bool IsRealNumber(this string input)
+        {
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return false;
+            }
+
+            input = input.Trim();
+            Regex regex = new Regex("^\\d+\\.\\d+([Ee][+-]?\\d+)?$");
             return regex.IsMatch(input);
         }
     }

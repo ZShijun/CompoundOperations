@@ -138,32 +138,32 @@ namespace CompoundOperations.Grammar {
 
             pattern = new TokenPattern((int) CompoundConstants.AND,
                                        "AND",
-                                       TokenPattern.PatternType.STRING,
-                                       "AND");
+                                       TokenPattern.PatternType.REGEXP,
+                                       "AND|and");
             AddPattern(pattern);
 
             pattern = new TokenPattern((int) CompoundConstants.OR,
                                        "OR",
-                                       TokenPattern.PatternType.STRING,
-                                       "OR");
+                                       TokenPattern.PatternType.REGEXP,
+                                       "OR|or");
             AddPattern(pattern);
 
             pattern = new TokenPattern((int) CompoundConstants.XOR,
                                        "XOR",
-                                       TokenPattern.PatternType.STRING,
-                                       "XOR");
+                                       TokenPattern.PatternType.REGEXP,
+                                       "XOR|xor");
             AddPattern(pattern);
 
             pattern = new TokenPattern((int) CompoundConstants.NOT,
                                        "NOT",
-                                       TokenPattern.PatternType.STRING,
-                                       "NOT");
+                                       TokenPattern.PatternType.REGEXP,
+                                       "NOT|not");
             AddPattern(pattern);
 
             pattern = new TokenPattern((int) CompoundConstants.IN,
                                        "IN",
-                                       TokenPattern.PatternType.STRING,
-                                       "in");
+                                       TokenPattern.PatternType.REGEXP,
+                                       "IN|in");
             AddPattern(pattern);
 
             pattern = new TokenPattern((int) CompoundConstants.DOT,
@@ -185,28 +185,22 @@ namespace CompoundOperations.Grammar {
             pattern.Ignore = true;
             AddPattern(pattern);
 
-            pattern = new TokenPattern((int) CompoundConstants.IDENTIFIER,
-                                       "IDENTIFIER",
-                                       TokenPattern.PatternType.REGEXP,
-                                       "[a-z_]\\w*");
-            AddPattern(pattern);
-
             pattern = new TokenPattern((int) CompoundConstants.INTEGER,
                                        "INTEGER",
                                        TokenPattern.PatternType.REGEXP,
-                                       "\\d*(u|l|ul|lu)?");
+                                       "\\d+");
             AddPattern(pattern);
 
             pattern = new TokenPattern((int) CompoundConstants.HEX,
                                        "HEX",
                                        TokenPattern.PatternType.REGEXP,
-                                       "0x[0-9a-f]+(u|l|ul|lu)?");
+                                       "0x[0-9a-f]+");
             AddPattern(pattern);
 
             pattern = new TokenPattern((int) CompoundConstants.REAL,
                                        "REAL",
                                        TokenPattern.PatternType.REGEXP,
-                                       "\\d+\\.\\d+([e][+-]\\d{1,3}?f?)");
+                                       "\\d+\\.\\d+([Ee][+-]\\d{1,3}?[Ff]?)");
             AddPattern(pattern);
 
             pattern = new TokenPattern((int) CompoundConstants.STRING,
@@ -223,20 +217,20 @@ namespace CompoundOperations.Grammar {
 
             pattern = new TokenPattern((int) CompoundConstants.TRUE,
                                        "TRUE",
-                                       TokenPattern.PatternType.STRING,
-                                       "True");
+                                       TokenPattern.PatternType.REGEXP,
+                                       "[Tt]rue");
             AddPattern(pattern);
 
             pattern = new TokenPattern((int) CompoundConstants.FALSE,
                                        "FALSE",
-                                       TokenPattern.PatternType.STRING,
-                                       "False");
+                                       TokenPattern.PatternType.REGEXP,
+                                       "[Ff]alse");
             AddPattern(pattern);
 
             pattern = new TokenPattern((int) CompoundConstants.NULL,
                                        "NULL",
-                                       TokenPattern.PatternType.STRING,
-                                       "NULL");
+                                       TokenPattern.PatternType.REGEXP,
+                                       "[Nn]ull");
             AddPattern(pattern);
 
             pattern = new TokenPattern((int) CompoundConstants.DATETIME,
@@ -247,20 +241,26 @@ namespace CompoundOperations.Grammar {
 
             pattern = new TokenPattern((int) CompoundConstants.IF,
                                        "IF",
-                                       TokenPattern.PatternType.STRING,
-                                       "if");
+                                       TokenPattern.PatternType.REGEXP,
+                                       "IF|if");
             AddPattern(pattern);
 
             pattern = new TokenPattern((int) CompoundConstants.IFS,
                                        "IFS",
-                                       TokenPattern.PatternType.STRING,
-                                       "ifs");
+                                       TokenPattern.PatternType.REGEXP,
+                                       "IFS|ifs");
             AddPattern(pattern);
 
             pattern = new TokenPattern((int) CompoundConstants.DATE,
                                        "DATE",
-                                       TokenPattern.PatternType.STRING,
-                                       "date");
+                                       TokenPattern.PatternType.REGEXP,
+                                       "DATE|date");
+            AddPattern(pattern);
+
+            pattern = new TokenPattern((int) CompoundConstants.IDENTIFIER,
+                                       "IDENTIFIER",
+                                       TokenPattern.PatternType.REGEXP,
+                                       "[a-zA-Z_]\\w*");
             AddPattern(pattern);
         }
     }

@@ -34,33 +34,34 @@ GT                           = ">"
 LE                           = "<="
 GE                           = ">="
 
-AND                          = "AND"
-OR                           = "OR"
-XOR                          = "XOR"
-NOT                          = "NOT"
+AND                          = <<AND|and>>
+OR                           = <<OR|or>>
+XOR                          = <<XOR|xor>>
+NOT                          = <<NOT|not>>
 
-IN                           = "in"
+IN                           = <<IN|in>>
 DOT                          = "."
 
 COMMA                        = ","
 WHITESPACE                   = <<\s+>> %ignore%
-IDENTIFIER                   = <<[a-z_]\w*>>
 
-INTEGER                      = <<\d*(u|l|ul|lu)?>>
-HEX                          = <<0x[0-9a-f]+(u|l|ul|lu)?>>
-REAL                         = <<\d+\.\d+([e][+-]\d{1,3}?f?)>>
+INTEGER                      = <<\d+>>
+HEX                          = <<0[Xx][0-9a-f]+>>
+REAL                         = <<\d+\.\d+([Ee][+-]?\d+)?>>
 STRING                       = <<"([^"\r\n\\]|\\u[0-9a-f]{4}|\\[\\"'trn])*">>
 CHAR                         = <<'([^'\r\n\\]|\\u[0-9a-f]{4}|\\[\\"'trn])'>>
-TRUE                         = "True"
-FALSE                        = "False"
-NULL                         = "NULL"
+TRUE                         = <<[Tt]rue>>
+FALSE                        = <<[Ff]alse>>
+NULL                         = <<[Nn]ull>>
 DATETIME                     = <<#[^#]+#>>
 
 // Special Functions
-IF                           = "if"
-IFS                          = "ifs"
-DATE                         = "date"
+IF                           = <<IF|if>>
+IFS                          = <<IFS|ifs>>
+DATE                         = <<DATE|date>>
 
+// 放在最底部，否则会与前面的定义冲突，例如会匹配到true、false等
+IDENTIFIER                   = <<[a-zA-Z_]\w*>>
 /** Production definitions **/
 %productions%
 /**

@@ -93,9 +93,6 @@ namespace CompoundOperations.Grammar {
             case (int) CompoundConstants.COMMA:
                 EnterComma((Token) node);
                 break;
-            case (int) CompoundConstants.IDENTIFIER:
-                EnterIdentifier((Token) node);
-                break;
             case (int) CompoundConstants.INTEGER:
                 EnterInteger((Token) node);
                 break;
@@ -131,6 +128,9 @@ namespace CompoundOperations.Grammar {
                 break;
             case (int) CompoundConstants.DATE:
                 EnterDate((Token) node);
+                break;
+            case (int) CompoundConstants.IDENTIFIER:
+                EnterIdentifier((Token) node);
                 break;
             case (int) CompoundConstants.EXPRESSION:
                 EnterExpression((Production) node);
@@ -236,8 +236,6 @@ namespace CompoundOperations.Grammar {
                 return ExitDot((Token) node);
             case (int) CompoundConstants.COMMA:
                 return ExitComma((Token) node);
-            case (int) CompoundConstants.IDENTIFIER:
-                return ExitIdentifier((Token) node);
             case (int) CompoundConstants.INTEGER:
                 return ExitInteger((Token) node);
             case (int) CompoundConstants.HEX:
@@ -262,6 +260,8 @@ namespace CompoundOperations.Grammar {
                 return ExitIfs((Token) node);
             case (int) CompoundConstants.DATE:
                 return ExitDate((Token) node);
+            case (int) CompoundConstants.IDENTIFIER:
+                return ExitIdentifier((Token) node);
             case (int) CompoundConstants.EXPRESSION:
                 return ExitExpression((Production) node);
             case (int) CompoundConstants.LOGICAL_EXPRESSION:
@@ -957,32 +957,6 @@ namespace CompoundOperations.Grammar {
          * <exception cref='ParseException'>if the node analysis
          * discovered errors</exception>
          */
-        public virtual void EnterIdentifier(Token node) {
-        }
-
-        /**
-         * <summary>Called when exiting a parse tree node.</summary>
-         *
-         * <param name='node'>the node being exited</param>
-         *
-         * <returns>the node to add to the parse tree, or
-         *          null if no parse tree should be created</returns>
-         *
-         * <exception cref='ParseException'>if the node analysis
-         * discovered errors</exception>
-         */
-        public virtual Node ExitIdentifier(Token node) {
-            return node;
-        }
-
-        /**
-         * <summary>Called when entering a parse tree node.</summary>
-         *
-         * <param name='node'>the node being entered</param>
-         *
-         * <exception cref='ParseException'>if the node analysis
-         * discovered errors</exception>
-         */
         public virtual void EnterInteger(Token node) {
         }
 
@@ -1284,6 +1258,32 @@ namespace CompoundOperations.Grammar {
          * discovered errors</exception>
          */
         public virtual Node ExitDate(Token node) {
+            return node;
+        }
+
+        /**
+         * <summary>Called when entering a parse tree node.</summary>
+         *
+         * <param name='node'>the node being entered</param>
+         *
+         * <exception cref='ParseException'>if the node analysis
+         * discovered errors</exception>
+         */
+        public virtual void EnterIdentifier(Token node) {
+        }
+
+        /**
+         * <summary>Called when exiting a parse tree node.</summary>
+         *
+         * <param name='node'>the node being exited</param>
+         *
+         * <returns>the node to add to the parse tree, or
+         *          null if no parse tree should be created</returns>
+         *
+         * <exception cref='ParseException'>if the node analysis
+         * discovered errors</exception>
+         */
+        public virtual Node ExitIdentifier(Token node) {
             return node;
         }
 

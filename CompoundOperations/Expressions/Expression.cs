@@ -19,8 +19,7 @@ namespace CompoundOperations.Expressions
             get
             {
                 object result;
-                if (this._elements != null
-                    && this._elements.Count == 1)
+                if (this._elements.Count == 1)
                 {
                     result = this._elements[0];
                 }

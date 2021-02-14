@@ -15,8 +15,8 @@ namespace CompoundOperations.Expressions
             decimal y = Convert.ToDecimal(right);
             return op switch
             {
-                "=" => x == y,
-                "<>" => x != y,
+                "==" => x == y,
+                "!=" => x != y,
                 ">" => x > y,
                 "<" => x < y,
                 ">=" => x >= y,

@@ -194,13 +194,13 @@ namespace CompoundOperations.Grammar {
             pattern = new TokenPattern((int) CompoundConstants.HEX,
                                        "HEX",
                                        TokenPattern.PatternType.REGEXP,
-                                       "0x[0-9a-f]+");
+                                       "0[Xx][0-9a-f]+");
             AddPattern(pattern);
 
             pattern = new TokenPattern((int) CompoundConstants.REAL,
                                        "REAL",
                                        TokenPattern.PatternType.REGEXP,
-                                       "\\d+\\.\\d+([Ee][+-]\\d{1,3}?[Ff]?)");
+                                       "\\d+\\.\\d+([Ee][+-]?\\d+)?");
             AddPattern(pattern);
 
             pattern = new TokenPattern((int) CompoundConstants.STRING,

@@ -108,10 +108,9 @@ LogicalOperator              = AND
                              | OR
                              | XOR ;
 
-
 ExpressionFactor             = ExpressionAtom
                              | LogicalAtom
-                             | "(" Expression ")" ;
+                             | "(" Expression {"," Expression} ")" ;
 // 表达式原子数据
 Atom                         = INTEGER
                              | HEX
@@ -161,7 +160,7 @@ LogicalOperator              = AND
                              | XOR ;
 
 Factor                       = Atom
-                             | "(" Expression ")" ;
+                             | "(" Expression {"," Expression} ")" ;
 
 Atom                         = INTEGER
                              | HEX

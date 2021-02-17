@@ -24,7 +24,8 @@ namespace CompoundOperations.Grammar {
             SUBPRODUCTION_2 = 3002,
             SUBPRODUCTION_3 = 3003,
             SUBPRODUCTION_4 = 3004,
-            SUBPRODUCTION_5 = 3005
+            SUBPRODUCTION_5 = 3005,
+            SUBPRODUCTION_6 = 3006
         }
 
         /**
@@ -215,6 +216,7 @@ namespace CompoundOperations.Grammar {
             alt = new ProductionPatternAlternative();
             alt.AddToken((int) CompoundConstants.LEFT_PAREN, 1, 1);
             alt.AddProduction((int) CompoundConstants.EXPRESSION, 1, 1);
+            alt.AddProduction((int) SynteticPatterns.SUBPRODUCTION_6, 0, -1);
             alt.AddToken((int) CompoundConstants.RIGHT_PAREN, 1, 1);
             pattern.AddAlternative(alt);
             AddPattern(pattern);
@@ -295,6 +297,15 @@ namespace CompoundOperations.Grammar {
             alt = new ProductionPatternAlternative();
             alt.AddToken((int) CompoundConstants.POWER, 1, 1);
             alt.AddProduction((int) CompoundConstants.POWER_EXPRESSION, 1, 1);
+            pattern.AddAlternative(alt);
+            AddPattern(pattern);
+
+            pattern = new ProductionPattern((int) SynteticPatterns.SUBPRODUCTION_6,
+                                            "Subproduction6");
+            pattern.Synthetic = true;
+            alt = new ProductionPatternAlternative();
+            alt.AddToken((int) CompoundConstants.COMMA, 1, 1);
+            alt.AddProduction((int) CompoundConstants.EXPRESSION, 1, 1);
             pattern.AddAlternative(alt);
             AddPattern(pattern);
         }

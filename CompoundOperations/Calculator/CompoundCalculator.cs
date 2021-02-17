@@ -164,7 +164,7 @@ namespace CompoundOperations.Calculator
 
         public override Node ExitString(Token node)
         {
-            node.Values.Add(node.Image);
+            node.Values.Add(node.Image.Substring(1, node.Image.Length - 2));
             return node;
         }
 
@@ -217,13 +217,13 @@ namespace CompoundOperations.Calculator
         #region + Comparisons
         public override Node ExitEq(Token node)
         {
-            node.Values.Add("==");
+            node.Values.Add("=");
             return node;
         }
 
         public override Node ExitNe(Token node)
         {
-            node.Values.Add("!=");
+            node.Values.Add("<>");
             return node;
         }
 
@@ -368,9 +368,19 @@ namespace CompoundOperations.Calculator
             {
                 result = GetValue(GetChildAt(node, 0), 0);
             }
-            else
+            else if (node.Count == 3)
             {
                 result = GetValue(GetChildAt(node, 1), 0);
+            }
+            else
+            {
+                ArrayList array = new ArrayList();
+                for (int i = 1; i < node.Count - 1; i += 2)
+                {
+                    var value = GetValue(GetChildAt(node, i), 0);
+                    array.Add(value);
+                }
+                result = array;
             }
             node.Values.Add(result);
             return node;

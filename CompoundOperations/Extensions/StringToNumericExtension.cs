@@ -9,7 +9,7 @@ namespace CompoundOperations.Extensions
     public static class StringToNumericExtension
     {
         /// <summary>
-        /// 将数字字符串转成decimal
+        /// 将数字字符串转成decimal(不处理负号"-")
         /// </summary>
         /// <param name="input">数字字符串</param>
         /// <returns></returns>
@@ -28,7 +28,7 @@ namespace CompoundOperations.Extensions
             else if (input.IsHexNumber())
             {
                 input = input[2..];
-                long num = long.Parse(input, NumberStyles.HexNumber);
+                ulong num = ulong.Parse(input, NumberStyles.HexNumber);
                 result = Convert.ToDecimal(num);
             }
             else if (input.IsRealNumber())
@@ -37,14 +37,14 @@ namespace CompoundOperations.Extensions
             }
             else
             {
-                throw new FormatException($"{input} is not a correct number");
+                throw new FormatException($"{input} is not a correct number format");
             }
 
             return result;
         }
 
         /// <summary>
-        /// 是否为十六进制数字字符串
+        /// 是否为十六进制数字字符串(不处理负号"-")
         /// </summary>
         /// <param name="input">数字字符串</param>
         /// <returns></returns>
@@ -61,7 +61,7 @@ namespace CompoundOperations.Extensions
         }
 
         /// <summary>
-        /// 是否为十进制数字字符串
+        /// 是否为十进制数字字符串(不处理负号"-")
         /// </summary>
         /// <param name="input">数字字符串</param>
         /// <returns></returns>
@@ -78,7 +78,7 @@ namespace CompoundOperations.Extensions
         }
 
         /// <summary>
-        /// 是否为浮点数
+        /// 是否为浮点数(不处理负号"-")
         /// </summary>
         /// <param name="input">数字字符串</param>
         /// <returns></returns>

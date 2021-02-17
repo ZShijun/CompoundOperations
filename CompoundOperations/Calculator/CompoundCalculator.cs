@@ -151,7 +151,9 @@ namespace CompoundOperations.Calculator
 
         public override Node ExitDatetime(Token node)
         {
-            return base.ExitDatetime(node);
+            DateTime val = node.Image.ParseToDateTime();
+            node.Values.Add(val);
+            return node;
         }
 
         public override Node ExitChar(Token node)

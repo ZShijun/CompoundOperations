@@ -127,7 +127,6 @@ Atom                         = INTEGER
 Expression                   = LogicalExpression;
 
 LogicalExpression            = BooleanExpression [LogicalOperator LogicalExpression];
-
 BooleanExpression            = ComparisonExpression
                              | NOT BooleanExpression;
 
@@ -136,6 +135,12 @@ AdditiveExpression           = MultiplicativeExpression [AdditiveOperator Additi
 MultiplicativeExpression     = NegativeExpression [MultiplicativeOperator MultiplicativeExpression];
 NegativeExpression           = "-"? PowerExpression;
 PowerExpression              = Factor ["^" PowerExpression];
+
+SpecialFunctionExpression    = DateExpression
+                             | IfExpression;
+
+DateExpression               = DATE "(" AdditiveExpression "," AdditiveExpression "," AdditiveExpression ")" ;
+IfExpression                 = IF "(" LogicalExpression "," Expression "," Expression ")" ;
 
 // º”∑®‘ÀÀ„
 AdditiveOperator             = ADD 
@@ -160,7 +165,8 @@ LogicalOperator              = AND
                              | XOR ;
 
 Factor                       = Atom
-                             | "(" Expression {"," Expression} ")" ;
+                             | "(" Expression {"," Expression} ")"
+                             | SpecialFunctionExpression ;
 
 Atom                         = INTEGER
                              | HEX

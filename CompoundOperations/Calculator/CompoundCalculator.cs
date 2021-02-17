@@ -336,6 +336,28 @@ namespace CompoundOperations.Calculator
             return node;
         }
 
+        public override Node ExitSpecialFunctionExpression(Production node)
+        {
+            node.Values.AddRange(GetChildValues(node));
+            return node;
+        }
+
+        public override Node ExitDateExpression(Production node)
+        {
+            var values = GetChildValues(node);
+            var expression = new DateExpression(values);
+            node.Values.Add(expression.Result);
+            return node;
+        }
+
+        public override Node ExitIfExpression(Production node)
+        {
+            var values = GetChildValues(node);
+            var expression = new IfExpression(values);
+            node.Values.Add(expression.Result);
+            return node;
+        }
+
         public override Node ExitAdditiveOperator(Production node)
         {
             node.Values.AddRange(GetChildValues(node));

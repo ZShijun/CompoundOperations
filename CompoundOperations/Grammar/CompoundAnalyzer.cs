@@ -156,6 +156,15 @@ namespace CompoundOperations.Grammar {
             case (int) CompoundConstants.POWER_EXPRESSION:
                 EnterPowerExpression((Production) node);
                 break;
+            case (int) CompoundConstants.SPECIAL_FUNCTION_EXPRESSION:
+                EnterSpecialFunctionExpression((Production) node);
+                break;
+            case (int) CompoundConstants.DATE_EXPRESSION:
+                EnterDateExpression((Production) node);
+                break;
+            case (int) CompoundConstants.IF_EXPRESSION:
+                EnterIfExpression((Production) node);
+                break;
             case (int) CompoundConstants.ADDITIVE_OPERATOR:
                 EnterAdditiveOperator((Production) node);
                 break;
@@ -278,6 +287,12 @@ namespace CompoundOperations.Grammar {
                 return ExitNegativeExpression((Production) node);
             case (int) CompoundConstants.POWER_EXPRESSION:
                 return ExitPowerExpression((Production) node);
+            case (int) CompoundConstants.SPECIAL_FUNCTION_EXPRESSION:
+                return ExitSpecialFunctionExpression((Production) node);
+            case (int) CompoundConstants.DATE_EXPRESSION:
+                return ExitDateExpression((Production) node);
+            case (int) CompoundConstants.IF_EXPRESSION:
+                return ExitIfExpression((Production) node);
             case (int) CompoundConstants.ADDITIVE_OPERATOR:
                 return ExitAdditiveOperator((Production) node);
             case (int) CompoundConstants.MULTIPLICATIVE_OPERATOR:
@@ -329,6 +344,15 @@ namespace CompoundOperations.Grammar {
                 break;
             case (int) CompoundConstants.POWER_EXPRESSION:
                 ChildPowerExpression(node, child);
+                break;
+            case (int) CompoundConstants.SPECIAL_FUNCTION_EXPRESSION:
+                ChildSpecialFunctionExpression(node, child);
+                break;
+            case (int) CompoundConstants.DATE_EXPRESSION:
+                ChildDateExpression(node, child);
+                break;
+            case (int) CompoundConstants.IF_EXPRESSION:
+                ChildIfExpression(node, child);
                 break;
             case (int) CompoundConstants.ADDITIVE_OPERATOR:
                 ChildAdditiveOperator(node, child);
@@ -1604,6 +1628,126 @@ namespace CompoundOperations.Grammar {
          * discovered errors</exception>
          */
         public virtual void ChildPowerExpression(Production node, Node child) {
+            node.AddChild(child);
+        }
+
+        /**
+         * <summary>Called when entering a parse tree node.</summary>
+         *
+         * <param name='node'>the node being entered</param>
+         *
+         * <exception cref='ParseException'>if the node analysis
+         * discovered errors</exception>
+         */
+        public virtual void EnterSpecialFunctionExpression(Production node) {
+        }
+
+        /**
+         * <summary>Called when exiting a parse tree node.</summary>
+         *
+         * <param name='node'>the node being exited</param>
+         *
+         * <returns>the node to add to the parse tree, or
+         *          null if no parse tree should be created</returns>
+         *
+         * <exception cref='ParseException'>if the node analysis
+         * discovered errors</exception>
+         */
+        public virtual Node ExitSpecialFunctionExpression(Production node) {
+            return node;
+        }
+
+        /**
+         * <summary>Called when adding a child to a parse tree
+         * node.</summary>
+         *
+         * <param name='node'>the parent node</param>
+         * <param name='child'>the child node, or null</param>
+         *
+         * <exception cref='ParseException'>if the node analysis
+         * discovered errors</exception>
+         */
+        public virtual void ChildSpecialFunctionExpression(Production node, Node child) {
+            node.AddChild(child);
+        }
+
+        /**
+         * <summary>Called when entering a parse tree node.</summary>
+         *
+         * <param name='node'>the node being entered</param>
+         *
+         * <exception cref='ParseException'>if the node analysis
+         * discovered errors</exception>
+         */
+        public virtual void EnterDateExpression(Production node) {
+        }
+
+        /**
+         * <summary>Called when exiting a parse tree node.</summary>
+         *
+         * <param name='node'>the node being exited</param>
+         *
+         * <returns>the node to add to the parse tree, or
+         *          null if no parse tree should be created</returns>
+         *
+         * <exception cref='ParseException'>if the node analysis
+         * discovered errors</exception>
+         */
+        public virtual Node ExitDateExpression(Production node) {
+            return node;
+        }
+
+        /**
+         * <summary>Called when adding a child to a parse tree
+         * node.</summary>
+         *
+         * <param name='node'>the parent node</param>
+         * <param name='child'>the child node, or null</param>
+         *
+         * <exception cref='ParseException'>if the node analysis
+         * discovered errors</exception>
+         */
+        public virtual void ChildDateExpression(Production node, Node child) {
+            node.AddChild(child);
+        }
+
+        /**
+         * <summary>Called when entering a parse tree node.</summary>
+         *
+         * <param name='node'>the node being entered</param>
+         *
+         * <exception cref='ParseException'>if the node analysis
+         * discovered errors</exception>
+         */
+        public virtual void EnterIfExpression(Production node) {
+        }
+
+        /**
+         * <summary>Called when exiting a parse tree node.</summary>
+         *
+         * <param name='node'>the node being exited</param>
+         *
+         * <returns>the node to add to the parse tree, or
+         *          null if no parse tree should be created</returns>
+         *
+         * <exception cref='ParseException'>if the node analysis
+         * discovered errors</exception>
+         */
+        public virtual Node ExitIfExpression(Production node) {
+            return node;
+        }
+
+        /**
+         * <summary>Called when adding a child to a parse tree
+         * node.</summary>
+         *
+         * <param name='node'>the parent node</param>
+         * <param name='child'>the child node, or null</param>
+         *
+         * <exception cref='ParseException'>if the node analysis
+         * discovered errors</exception>
+         */
+        public virtual void ChildIfExpression(Production node, Node child) {
             node.AddChild(child);
         }
 

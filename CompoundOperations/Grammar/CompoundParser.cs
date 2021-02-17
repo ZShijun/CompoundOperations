@@ -150,6 +150,44 @@ namespace CompoundOperations.Grammar {
             pattern.AddAlternative(alt);
             AddPattern(pattern);
 
+            pattern = new ProductionPattern((int) CompoundConstants.SPECIAL_FUNCTION_EXPRESSION,
+                                            "SpecialFunctionExpression");
+            alt = new ProductionPatternAlternative();
+            alt.AddProduction((int) CompoundConstants.DATE_EXPRESSION, 1, 1);
+            pattern.AddAlternative(alt);
+            alt = new ProductionPatternAlternative();
+            alt.AddProduction((int) CompoundConstants.IF_EXPRESSION, 1, 1);
+            pattern.AddAlternative(alt);
+            AddPattern(pattern);
+
+            pattern = new ProductionPattern((int) CompoundConstants.DATE_EXPRESSION,
+                                            "DateExpression");
+            alt = new ProductionPatternAlternative();
+            alt.AddToken((int) CompoundConstants.DATE, 1, 1);
+            alt.AddToken((int) CompoundConstants.LEFT_PAREN, 1, 1);
+            alt.AddProduction((int) CompoundConstants.ADDITIVE_EXPRESSION, 1, 1);
+            alt.AddToken((int) CompoundConstants.COMMA, 1, 1);
+            alt.AddProduction((int) CompoundConstants.ADDITIVE_EXPRESSION, 1, 1);
+            alt.AddToken((int) CompoundConstants.COMMA, 1, 1);
+            alt.AddProduction((int) CompoundConstants.ADDITIVE_EXPRESSION, 1, 1);
+            alt.AddToken((int) CompoundConstants.RIGHT_PAREN, 1, 1);
+            pattern.AddAlternative(alt);
+            AddPattern(pattern);
+
+            pattern = new ProductionPattern((int) CompoundConstants.IF_EXPRESSION,
+                                            "IfExpression");
+            alt = new ProductionPatternAlternative();
+            alt.AddToken((int) CompoundConstants.IF, 1, 1);
+            alt.AddToken((int) CompoundConstants.LEFT_PAREN, 1, 1);
+            alt.AddProduction((int) CompoundConstants.LOGICAL_EXPRESSION, 1, 1);
+            alt.AddToken((int) CompoundConstants.COMMA, 1, 1);
+            alt.AddProduction((int) CompoundConstants.EXPRESSION, 1, 1);
+            alt.AddToken((int) CompoundConstants.COMMA, 1, 1);
+            alt.AddProduction((int) CompoundConstants.EXPRESSION, 1, 1);
+            alt.AddToken((int) CompoundConstants.RIGHT_PAREN, 1, 1);
+            pattern.AddAlternative(alt);
+            AddPattern(pattern);
+
             pattern = new ProductionPattern((int) CompoundConstants.ADDITIVE_OPERATOR,
                                             "AdditiveOperator");
             alt = new ProductionPatternAlternative();
@@ -218,6 +256,9 @@ namespace CompoundOperations.Grammar {
             alt.AddProduction((int) CompoundConstants.EXPRESSION, 1, 1);
             alt.AddProduction((int) SynteticPatterns.SUBPRODUCTION_6, 0, -1);
             alt.AddToken((int) CompoundConstants.RIGHT_PAREN, 1, 1);
+            pattern.AddAlternative(alt);
+            alt = new ProductionPatternAlternative();
+            alt.AddProduction((int) CompoundConstants.SPECIAL_FUNCTION_EXPRESSION, 1, 1);
             pattern.AddAlternative(alt);
             AddPattern(pattern);
 

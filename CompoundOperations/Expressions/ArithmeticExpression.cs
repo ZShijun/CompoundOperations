@@ -12,6 +12,12 @@ namespace CompoundOperations.Expressions
 
         protected override object Calculate(object left, string op, object right)
         {
+            if (left.GetType() == typeof(string)
+                && op == "+")
+            {
+                return left.ToString() + right.ToString();
+            }
+
             decimal x = Convert.ToDecimal(left);
             decimal y = Convert.ToDecimal(right);
             return op switch
